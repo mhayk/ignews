@@ -1,5 +1,5 @@
-import { GetStaticProps } from "next"
-import { getSession, useSession } from "next-auth/client"
+import { GetStaticPaths, GetStaticProps } from "next"
+import { useSession } from "next-auth/client"
 import Head from "next/head"
 import { RichText } from "prismic-dom"
 import Link from 'next/link';
@@ -55,12 +55,17 @@ export default function PostPreview({ post }: PostPreviewProps) {
         </>
     )
 }
-
-export const getStaticPaths = () => {
+/* what posts preview(static pages) I want to generate during the build the static pages */
+export const getStaticPaths: GetStaticPaths = async () => {
     return {
         paths: [],
         fallback: 'blocking'
     }
+
+    /* fallback */
+    // true => it is not good for SEO
+    // false => if the post has not been generated in static mode yet it will return 404.
+    // blocking => almost equal fallback "true" but it will try to load in SSR.
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
