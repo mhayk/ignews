@@ -17,6 +17,9 @@ describe('Home page', () => {
 
         render(<Home product={{ priceId: 'fake-price-id', amount: 'R$10,00' }} />)
 
+        /* Testing Playground - It is magic !!! */
+        //screen.logTestingPlaygroundURL()
+
         expect(screen.getByText(/R\$10,00/i)).toBeInTheDocument()
     })
 
